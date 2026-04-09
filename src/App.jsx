@@ -52,7 +52,7 @@ const App = () => {
         < Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         {currentview === 'home' && <BookmarkCard bookmarks={filteredbooks} handlearchived = {handlearchived} />}
-        {currentview === 'archived' && <ArchivedView bookmarks={archivedBooks} />}
+        {currentview === 'archived' && <ArchivedView bookmarks={archivedBooks}  handlearchived = {handlearchived}/>}
         <Sidebar allTags={allTags} onhandleChange={handleChange} tags={tags} setTags={setTags} setCurrentviews={setCurrentviews} />
       </>
     )
