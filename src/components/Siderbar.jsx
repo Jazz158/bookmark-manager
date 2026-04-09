@@ -1,8 +1,10 @@
-const Sidebar = ({allTags,onhandleChange,tags}) => {
+const Sidebar = ({allTags,onhandleChange,tags,setTags,setCurrentviews}) => {
 
 
     return(
         <>
+        <button onClick = {() => setCurrentviews("home")}>Home</button>
+        <button onClick = {() => setCurrentviews("archived")}>Archived</button>
         <ul style={{ listStyle: 'none', padding: 0 }}>
             {allTags.map((item) => (
                 <li key={item}><input
@@ -14,9 +16,12 @@ const Sidebar = ({allTags,onhandleChange,tags}) => {
                 
                 />
                 <label>{item}</label>
+                
                     </li>
+                        
             ))}
         </ul>
+         <button onClick = {() => setTags([])}>Reset Filters</button>   
 
         </>
     )

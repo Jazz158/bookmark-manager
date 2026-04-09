@@ -1,12 +1,8 @@
-const BookmarkCard = ({ filteredbooks }) => {
+const BookmarkCard = ({ bookmarks }) => {
   return (
     <ul>
-      {filteredbooks.map((item) => (
-        <li key={item.id}>{item.title}</li>
+      {bookmarks.map((item) => (
+        <li key={item.id}>{item.title} - {item.description}</li>
       ))}
-    </ul>
-  )
-}
-
+    </ul>)}
 export default BookmarkCard;
-
