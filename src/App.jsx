@@ -24,6 +24,12 @@ const App = () => {
 
     const archivedBooks = bookmarks.filter((item) => item.isArchived)
 
+   const handlearchived = (id) => {
+  setBookmarks(bookmarks.map((item) =>
+    item.id === id ? {...item, isArchived: !item.isArchived} : item
+  ))
+}
+
 
     const allTags = [...new Set(bookmarks.flatMap((item) => (item.tags)))].sort()
 
@@ -45,7 +51,7 @@ const App = () => {
       <>
         < Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-        {currentview === 'home' && <BookmarkCard bookmarks={filteredbooks} />}
+        {currentview === 'home' && <BookmarkCard bookmarks={filteredbooks} handlearchived = {handlearchived} />}
         {currentview === 'archived' && <ArchivedView bookmarks={archivedBooks} />}
         <Sidebar allTags={allTags} onhandleChange={handleChange} tags={tags} setTags={setTags} setCurrentviews={setCurrentviews} />
       </>
