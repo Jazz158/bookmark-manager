@@ -1,11 +1,19 @@
-const Header = ({searchQuery,setSearchQuery}) => {
+const Header = ({ searchQuery, setSearchQuery }) => {
+  return (
+    <>
+      <input
+        type="name"
+        placeholder=" Search by title "
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      
 
+    </>
 
-    return(<>
-    <input type = "name" placeholder = " Search by title " value = {searchQuery}   onChange = { (e) => setSearchQuery(e.target.value)}/>
-    </>)
+  )
 }
 
-export default Header;
+export default Header
 
 
