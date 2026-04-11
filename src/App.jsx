@@ -22,6 +22,9 @@ const App = () => {
     return matchesSearch && matchesTags && matchesArchived});
 
 
+  const isPinned = [...filteredbooks].sort((a,b) =>  b.pinned - a.pinned)
+
+
     const archivedBooks = bookmarks.filter((item) => item.isArchived)
 
    const handlearchived = (id) => {
@@ -29,6 +32,13 @@ const App = () => {
     item.id === id ? {...item, isArchived: !item.isArchived} : item
   ))
 }
+
+ const handlepinned = (id) => {
+   setBookmarks(bookmarks.map((item) =>
+    item.id === id ? {...item, pinned: !item.pinned} : item
+  ))
+
+ }
 
 
     const allTags = [...new Set(bookmarks.flatMap((item) => (item.tags)))].sort()
@@ -51,7 +61,7 @@ const App = () => {
       <>
         < Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-        {currentview === 'home' && <BookmarkCard bookmarks={filteredbooks} handlearchived = {handlearchived} />}
+        {currentview === 'home' && <BookmarkCard bookmarks={isPinned} handlearchived = {handlearchived} handlepinned ={handlepinned} />}
         {currentview === 'archived' && <ArchivedView bookmarks={archivedBooks}  handlearchived = {handlearchived}/>}
         <Sidebar allTags={allTags} onhandleChange={handleChange} tags={tags} setTags={setTags} setCurrentviews={setCurrentviews} />
       </>

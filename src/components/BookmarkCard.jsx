@@ -1,4 +1,4 @@
-const BookmarkCard = ({ bookmarks,handlearchived }) => {
+const BookmarkCard = ({ bookmarks,handlearchived,handlepinned }) => {
   return (
     <ul>
       {bookmarks.map((item) => (
@@ -7,6 +7,7 @@ const BookmarkCard = ({ bookmarks,handlearchived }) => {
        <button onClick={() => handlearchived(item.id)}>
         Archived button for now lol
       </button>
+      <button onClick = {() => handlepinned(item.id)} >Pinned</button>
         
         </li>
       
