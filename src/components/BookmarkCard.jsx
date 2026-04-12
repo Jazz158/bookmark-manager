@@ -1,4 +1,4 @@
-const BookmarkCard = ({ bookmarks, handlearchived, handlepinned }) => {
+const BookmarkCard = ({ bookmarks, handlearchived, handlepinned,handleedit }) => {
   return (
     <>
       <ul>
@@ -8,19 +8,13 @@ const BookmarkCard = ({ bookmarks, handlearchived, handlepinned }) => {
             <button onClick={() => handlearchived(item.id)}>Archive</button>
             <button onClick={() => handlepinned(item.id)}>Pin</button>
             <button onClick={() => navigator.clipboard.writeText(item.url)}>Copy URL</button>
+            <button onClick = {() => handleedit(item)}>Edit</button>
             <a href={item.url} target="_blank" rel="noopener noreferrer">Visit</a>
           </li>
         ))}
 
       </ul>
-
-      <button onClick={() => navigator.clipboard.writeText(item.url)}>Copy URL</button>
-      <a href={bookmark.url} target="_blank" rel="noopener noreferrer">
-        Visit
-      </a>
     </>
   )
-
-
 }
 export default BookmarkCard;

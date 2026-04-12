@@ -1,14 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const AddBookmark = ({ onAdd }) => {
+const AddBookmark = ({ onAdd,editingbookmark }) => {
   const [form, setForm] = useState({ title: "", description: "", url: "", tags: "" })
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
+
+
+
   }
 
+
+  useEffect(() => {
+    if (editingbookmark) {
+      setForm({
+        title: editingbookmark.title,
+        description: editingbookmark.description,
+        url: editingbookmark.url,
+        tags: editingbookmark.tags.join(", "),
+      });
+      return
+    }
+
+    setForm({ title: "", description: "", url: "", tags: "" })
+  }, [editingbookmark]);
+
   const handleSubmit = (e) => {
+
+
     e.preventDefault()
+  
+
     onAdd(form)
     setForm({ title: "", description: "", url: "", tags: "" })
   }
@@ -24,4 +46,4 @@ const AddBookmark = ({ onAdd }) => {
   )
 }
 
-export default AddBookmark
+export default AddBookmark;
