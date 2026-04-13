@@ -13,6 +13,7 @@ const App = () => {
   const [currentview, setCurrentviews] = useState("home")
   const [showForm, setShowForm] = useState(false)
   const [editingbookmark, setEditingbookmark] = useState(null)
+  const [darkmode,setDarkmode] = useState(false)
 
   const filteredbooks = bookmarks.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -95,8 +96,8 @@ const App = () => {
   }
 
   return (
-    <>
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    <div className = {darkmode ? "dark" :"white"}>
+      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} darkmode = {darkmode} setDarkmode = {setDarkmode} />
       <button
         onClick={() => {
           setEditingbookmark(null)
@@ -129,7 +130,7 @@ const App = () => {
         setTags={setTags}
         setCurrentviews={setCurrentviews}
       />
-    </>
+    </div>
   )
 }
 

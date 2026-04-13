@@ -1,4 +1,4 @@
-const Header = ({ searchQuery, setSearchQuery }) => {
+const Header = ({ searchQuery, setSearchQuery,darkmode,setDarkmode }) => {
   return (
     <>
       <input
@@ -7,6 +7,8 @@ const Header = ({ searchQuery, setSearchQuery }) => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+
+      <button onClick = {() => setDarkmode(!darkmode)}>Dark Mode</button>
       
 
     </>
