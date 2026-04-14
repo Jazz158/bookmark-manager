@@ -14,6 +14,7 @@ const App = () => {
   const [showForm, setShowForm] = useState(false)
   const [editingbookmark, setEditingbookmark] = useState(null)
   const [darkmode,setDarkmode] = useState(false)
+  const [sorttype,setSorttype] = useState("recently_added")
 
   const filteredbooks = bookmarks.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -63,7 +64,6 @@ const App = () => {
     setShowForm(true)
   }
 
-  const isPinned = [...filteredbooks].sort((a, b) => b.pinned - a.pinned)
   const archivedBooks = bookmarks.filter((item) => item.isArchived)
 
   const handlearchived = (id) => {
@@ -95,6 +95,18 @@ const App = () => {
     setTags(tags.filter((tag) => tag !== value))
   }
 
+
+  const sortedfunction = {
+    recently_added: (a, b) =>
+      new Date(b.createdAt || 0) - new Date(a.createdAt || 0),
+    recently_visited: (a, b) =>
+      new Date(b.lastVisited || 0) - new Date(a.lastVisited || 0),
+    most_visiting: (a, b) => (b.visitCount || 0) - (a.visitCount || 0),
+  }
+
+  const sorteddata = [...filteredbooks]
+    .sort(sortedfunction[sorttype])
+    .sort((a, b) => b.pinned - a.pinned)
   return (
     <div className = {darkmode ? "dark" :"white"}>
       <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} darkmode = {darkmode} setDarkmode = {setDarkmode} />
@@ -111,10 +123,12 @@ const App = () => {
       )}
       {currentview === 'home' && (
         <BookmarkCard
-          bookmarks={isPinned}
+          bookmarks={sorteddata}
           handlearchived={handlearchived}
           handlepinned={handlepinned}
           handleedit={handleedit}
+          sorttype={sorttype}
+          setSorttype={setSorttype}
         />
       )}
       {currentview === 'archived' && (
