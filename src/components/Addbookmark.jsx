@@ -36,7 +36,7 @@ const AddBookmark = ({ onAdd,editingbookmark }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="add-bookmark-form" onSubmit={handleSubmit}>
       <input name="title" placeholder="Title" value={form.title} onChange={handleChange} />
       <input name="description" placeholder="Description" value={form.description} onChange={handleChange} />
       <input name="url" placeholder="URL" value={form.url} onChange={handleChange} />

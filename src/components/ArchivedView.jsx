@@ -1,15 +1,29 @@
-
-const ArchivedView = ({ bookmarks,handlearchived }) => {
+const ArchivedView = ({ bookmarks, handlearchived }) => {
   return (
-    <ul>
-      {bookmarks.map((item) => (
-        <li key={item.id}>{item.title}
-         <button onClick={() => handlearchived(item.id)}>
-        Archived button for now lol
-      </button></li>
-      ))}
-    </ul>
+    <section className="bookmark-section">
+      <div className="bookmark-toolbar">
+        <h2>Archived bookmarks</h2>
+      </div>
+      <ul className="bookmark-grid">
+        {bookmarks.map((item) => (
+          <li className="bookmark-card" key={item.id}>
+            <div className="card-top">
+              <div className="card-brand">
+                <div>
+                  <strong>{item.title}</strong>
+                  <p className="card-domain">{item.url}</p>
+                </div>
+              </div>
+            </div>
+            <p className="card-description">{item.description}</p>
+            <div className="card-actions">
+              <button onClick={() => handlearchived(item.id)}>Unarchive</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }
 
-export default ArchivedView;
+export default ArchivedView

@@ -1,0 +1,485 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(250, 187, 183, 0.28), transparent 18%),
+    radial-gradient(circle at 85% 16%, rgba(120, 204, 213, 0.22), transparent 16%),
+    radial-gradient(circle at 84% 76%, rgba(120, 204, 213, 0.2), transparent 16%),
+    linear-gradient(180deg, #fffaf6 0%, #f5f8f5 100%);
+  color: #20332f;
+}
+
+.app-layout {
+  display: flex;
+  width: min(1180px, calc(100% - 48px));
+  min-height: calc(100vh - 48px);
+  margin: 24px auto;
+  background: #eff6f2;
+  border: 1px solid #dde7e2;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 26px 48px rgba(41, 63, 58, 0.16);
+}
+
+.sidebar {
+  width: 252px;
+  background: #ffffff;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-right: 1px solid #e5ece8;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #20332f;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.logo img {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #29413c;
+  text-align: left;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background: #edf4ef;
+}
+
+.sidebar button.is-active {
+  background: #e3efea;
+}
+
+.sidebar-section-title {
+  margin-top: 8px;
+  color: #7f908b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tag-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tag-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #60716c;
+  font-size: 14px;
+}
+
+.tag-count {
+  min-width: 20px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #edf4ef;
+  color: #73847f;
+  font-size: 12px;
+  text-align: center;
+}
+
+.sidebar-reset {
+  margin-top: auto;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #eff6f2;
+}
+
+.header {
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #dfe8e3;
+}
+
+.search-input {
+  width: min(420px, 100%);
+  padding: 12px 16px;
+  border: 1px solid #dde6e1;
+  border-radius: 12px;
+  background: #fbfcfb;
+  font-size: 14px;
+  outline: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-actions button {
+  padding: 11px 16px;
+  border: 1px solid #d7e0db;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #20332f;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.header-actions button:first-child {
+  background: #0f5d57;
+  border-color: #0f5d57;
+  color: #ffffff;
+}
+
+.header-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #edf3ef;
+}
+
+.bookmark-section {
+  padding: 24px;
+}
+
+.bookmark-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.bookmark-toolbar h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #21342f;
+}
+
+.sort-menu {
+  position: relative;
+}
+
+.sort-button {
+  padding: 11px 14px;
+  border: 1px solid #d7e0db;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #29413c;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sort-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 190px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #ffffff;
+  border: 1px solid #dde6e1;
+  border-radius: 14px;
+  box-shadow: 0 18px 30px rgba(41, 63, 58, 0.14);
+  z-index: 3;
+}
+
+.sort-option {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #29413c;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sort-option:hover,
+.sort-option.is-selected {
+  background: #edf4ef;
+}
+
+.bookmark-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.bookmark-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid #e0e8e4;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(55, 79, 72, 0.08);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.card-brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.card-favicon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.card-brand strong {
+  display: block;
+  color: #20332f;
+  font-size: 15px;
+}
+
+.card-domain {
+  margin-top: 2px;
+  color: #849690;
+  font-size: 12px;
+}
+
+.card-menu-button {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  border: 1px solid #e0e8e4;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #72857f;
+  cursor: pointer;
+}
+
+.card-description {
+  color: #5a6a65;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card-tag {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #edf4ef;
+  color: #667772;
+  font-size: 12px;
+}
+
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #edf1ee;
+  color: #7d8d88;
+  font-size: 12px;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bookmark-card button {
+  width: auto;
+  padding: 4px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.bookmark-card button:hover {
+  background: #f0f0f0;
+}
+
+.bookmark-card .card-menu-button {
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.visit-link {
+  align-self: flex-start;
+  color: #0f5d57;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.dark {
+  background-color: #16201f;
+  color: #f4fbf8;
+}
+
+.dark .main-content,
+.dark .app-layout {
+  background: #1b2826;
+  border-color: #293936;
+}
+
+.dark .sidebar,
+.dark .header,
+.dark .bookmark-card,
+.dark .sort-dropdown {
+  background: #22312f;
+  border-color: #314441;
+}
+
+.dark .logo,
+.dark .bookmark-toolbar h2,
+.dark .card-brand strong,
+.dark .header-actions button,
+.dark .sort-button,
+.dark .sort-option,
+.dark .visit-link {
+  color: #f4fbf8;
+}
+
+.dark .search-input,
+.dark .sort-button,
+.dark .header-actions button,
+.dark .bookmark-card button,
+.dark .card-menu-button {
+  background: #253634;
+  border-color: #354946;
+  color: #f4fbf8;
+}
+
+.dark .header-actions button:first-child {
+  background: #2f8b84;
+  border-color: #2f8b84;
+}
+
+@media (max-width: 960px) {
+  .bookmark-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    width: calc(100% - 24px);
+    min-height: auto;
+    margin: 12px auto;
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5ece8;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-actions {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .bookmark-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bookmark-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.add-bookmark-form {
+  display: flex;
+  gap: 8px;
+  padding: 16px 24px;
+  background: white;
+  border-bottom: 1px solid #dfe8e3;
+  flex-wrap: wrap;
+}
+
+.add-bookmark-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #dde6e1;
+  border-radius: 10px;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.add-bookmark-form button {
+  padding: 10px 20px;
+  background: #0f5d57;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}

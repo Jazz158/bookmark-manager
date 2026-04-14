@@ -108,42 +108,48 @@ const App = () => {
     .sort(sortedfunction[sorttype])
     .sort((a, b) => b.pinned - a.pinned)
   return (
-    <div className = {darkmode ? "dark" :"white"}>
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} darkmode = {darkmode} setDarkmode = {setDarkmode} />
-      <button
-        onClick={() => {
-          setEditingbookmark(null)
-          setShowForm(!showForm)
-        }}
-      >
-        Add Bookmark
-      </button>
-      {showForm && (
-        <AddBookmark onAdd={handleAdd} editingbookmark={editingbookmark} />
-      )}
-      {currentview === 'home' && (
-        <BookmarkCard
-          bookmarks={sorteddata}
-          handlearchived={handlearchived}
-          handlepinned={handlepinned}
-          handleedit={handleedit}
-          sorttype={sorttype}
-          setSorttype={setSorttype}
-        />
-      )}
-      {currentview === 'archived' && (
-        <ArchivedView
-          bookmarks={archivedBooks}
-          handlearchived={handlearchived}
-        />
-      )}
+    <div className={`app-layout ${darkmode ? "dark" : "white"}`}>
       <Sidebar
         allTags={allTags}
+        bookmarks={bookmarks}
         onhandleChange={handleChange}
         tags={tags}
         setTags={setTags}
         setCurrentviews={setCurrentviews}
+        currentview={currentview}
       />
+      <div className="main-content">
+        <Header
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          darkmode={darkmode}
+          setDarkmode={setDarkmode}
+          onAddClick={() => {
+            setEditingbookmark(null)
+            setShowForm(!showForm)
+          }}
+          showForm={showForm}
+        />
+        {showForm && (
+          <AddBookmark onAdd={handleAdd} editingbookmark={editingbookmark} />
+        )}
+        {currentview === 'home' && (
+          <BookmarkCard
+            bookmarks={sorteddata}
+            handlearchived={handlearchived}
+            handlepinned={handlepinned}
+            handleedit={handleedit}
+            sorttype={sorttype}
+            setSorttype={setSorttype}
+          />
+        )}
+        {currentview === 'archived' && (
+          <ArchivedView
+            bookmarks={archivedBooks}
+            handlearchived={handlearchived}
+          />
+        )}
+      </div>
     </div>
   )
 }
