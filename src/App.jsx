@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import BookmarkCard from "./components/BookmarkCard"
 import Header from './components/Header'
 import data from "./data/data.json"
@@ -7,7 +7,10 @@ import ArchivedView from './components/ArchivedView'
 import AddBookmark from './components/Addbookmark'
 
 const App = () => {
-  const [bookmarks, setBookmarks] = useState(data.bookmarks)
+  const [bookmarks, setBookmarks] = useState(() => {
+  const saved = localStorage.getItem('bookmarks')
+  return saved ? JSON.parse(saved) : data.bookmarks
+})
   const [searchQuery, setSearchQuery] = useState("")
   const [tags, setTags] = useState([])
   const [currentview, setCurrentviews] = useState("home")
@@ -24,6 +27,10 @@ const App = () => {
 
     return matchesSearch && matchesTags && matchesArchived
   })
+
+  useEffect(() => {
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+}, [bookmarks])
 
   const handleAdd = (formData) => {
     const normalizedTags = Array.isArray(formData.tags)
@@ -46,16 +53,20 @@ const App = () => {
       return
     }
 
-    setBookmarks([
-      ...bookmarks,
-      {
-        ...formData,
-        tags: normalizedTags,
-        id: Date.now(),
-        isArchived: false,
-        pinned: false,
-      },
-    ])
+   setBookmarks([
+  ...bookmarks,
+  {
+    ...formData,
+    tags: normalizedTags,
+    id: Date.now(),
+    isArchived: false,
+    pinned: false,
+    favicon: '',
+    visitCount: 0,
+    lastVisited: null,
+    createdAt: new Date().toISOString(),
+  },
+])
     setShowForm(false)
   }
 
